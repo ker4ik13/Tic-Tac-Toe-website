@@ -1,0 +1,274 @@
+@import 'nullstyle';
+
+// variables
+$bgcolor: #fff;
+$bgcolor: #fff;
+$width: 70%;
+$height: 70%;
+:root{
+    --cross-color: #000;
+    --circle-color: #000;
+}
+
+.invisible{
+    opacity: 0;
+    visibility: hidden;
+}
+.visible{
+    opacity: 1;
+    visibility: visible;
+}
+.transform{
+    transform: scale(0);
+}
+
+// styles
+body{
+    overflow: hidden;
+}
+
+// preloader
+
+.preloader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    mix-blend-mode: color;
+    transition: opacity .2s linear, visibility .2s linear;
+}
+.loader {
+    overflow:hidden;
+    font-size: 10px;
+    margin: 50px auto;
+    text-indent: -9999em;
+    width: 11em;
+    height: 11em;
+    border-radius: 50%;
+    background: #111;
+    background: -moz-linear-gradient(left, #111 10%, rgba(101,171,248, 0) 42%);
+    background: -webkit-linear-gradient(left, #111 10%, rgba(101,171,248, 0) 42%);
+    background: -o-linear-gradient(left, #111 10%, rgba(101,171,248, 0) 42%);
+    background: -ms-linear-gradient(left, #111 10%, rgba(101,171,248, 0) 42%);
+    background: linear-gradient(to right, #111 10%, rgba(101,171,248, 0) 42%);
+    position: relative;
+    -webkit-animation: load3 1.4s infinite linear;
+    animation: load3 1.4s infinite linear;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  .loader:before {
+    width: 50%;
+    height: 50%;
+    background: #111;
+    border-radius: 100% 0 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+  }
+  .loader:after {
+    background: white;
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+  @-webkit-keyframes load3 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes load3 {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+// styles
+
+.modal {
+    width: clamp(300px, 30vw, 1000px);
+    height: clamp(300px, 30vh, 700px);
+    background-color: darken($bgcolor, 10%);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    transition: opacity .2s linear, visibility .2s linear;
+}
+.modal__title {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+.modal__text {
+    text-align: center;
+}
+.button {
+    font-size: calc((50vw + 50vh) * 0.01);
+    border-radius: 1vw;
+    padding: 12px 18px;
+    background-color: darken($bgcolor, 20%);
+    color: #111;
+    width: 100%;
+    white-space: nowrap;
+    font-weight: 700;
+    text-transform: uppercase;
+    filter: drop-shadow(0 5px 0 #222);
+    transition: transform .2s ease-in-out, filter .2s ease-in-out, background-color .6s linear, color .6s linear;
+    &:hover{
+        transform: translate(0, 5px);
+        filter: none;
+    }
+}
+.modal__button{
+    width: 50%;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    transition: background-color .6s linear;
+    &.dark-theme{
+        --cross-color: #fff;
+        --circle-color: #fff;
+        $bgcolor: #111;
+        background-color: $bgcolor;
+        .game{
+            background-color: lighten($bgcolor, 10%);
+        }
+        .game-field{
+            background-color: lighten($bgcolor, 20%);
+        }
+        .button{
+            color: #fff;
+            background-color: lighten( $bgcolor, 20%);
+        }
+        .modal{
+            background-color: lighten(#111, 10%);
+        }
+        .modal__title, .modal__text{
+            color: #fff;
+        }
+        .preloader{
+            mix-blend-mode: normal;
+        }
+        .loader{
+            background: -moz-linear-gradient(left, #fff 10%, rgba(255, 255, 255, 0) 42%);
+            background: -webkit-linear-gradient(left, #fff 10%, rgba(255, 255, 255, 0) 42%);
+            background: -o-linear-gradient(left, #fff 10%, rgba(255, 255, 255, 0) 42%);
+            background: -ms-linear-gradient(left, #fff 10%, rgba(255, 255, 255, 0) 42%);
+            background: linear-gradient(to right, #fff 10%, rgba(255, 255, 255, 0) 42%);
+        }
+        .loader:before {
+            background: #fff;
+        }
+        .loader:after{
+            background: #111;
+        }
+    }
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    padding-top: 5vh;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    max-width: 43vw;
+    flex-wrap: wrap;
+    transition: opacity .2s linear, visibility .2s linear;
+}
+.game {
+    margin-top: 5vh;
+    display: grid;
+    grid-template-columns: repeat(3, clamp(80px, 13vw, 200px));
+    grid-template-rows: repeat(3, clamp(80px, 13vw, 200px));
+    border-radius: 3vw;
+    gap: 1.5vw;
+    padding: 1.5vw;
+    background-color: darken($bgcolor, 10%);
+    transition: background-color .6s linear, opacity .2s linear, visibility .2s linear, transform .4s linear;
+
+}
+.game-field {
+    background-color: darken($bgcolor, 20%);
+    border-radius: 1.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color .6s linear, opacity .2s linear, visibility .2s linear, transform .4s ease-in-out;
+    position: relative;
+    &:hover{
+        &::after{
+            position: absolute;
+            content: url('../../img/game/cross.svg');
+            animation: clicked .2s ease-in-out;
+            opacity: .6;
+            width: inherit;
+        }
+    }
+}
+.cross {
+    fill: var(--cross-color);
+    width: $width;
+    height: $height;
+    transition: fill .6s linear;
+    animation: clicked .2s ease-in-out;
+}
+.circle {
+    stroke: var(--circle-color);
+    stroke-width: 5px;
+    border-radius: 50%;
+    width: $width;
+    height: $height;
+    transition: stroke .6s linear;
+    animation: clicked .2s ease-in-out;
+}
+.game-img{
+    width: $width;
+    height: $height;
+}
+
+// Анимация клика
+
+@keyframes clicked {
+    0%{
+        transform: scale(0);
+    }
+    60%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
