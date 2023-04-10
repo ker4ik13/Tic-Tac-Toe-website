@@ -77,6 +77,10 @@ h1, h2, h3, h4, h5, h6 {
   --circle-color: #000;
 }
 
+html {
+  transition: background-color 0.6s linear;
+}
+
 .invisible {
   opacity: 0;
   visibility: hidden;
@@ -162,20 +166,30 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  transition: opacity 0.2s linear, visibility 0.2s linear;
+  transition: opacity 0.2s linear, visibility 0.2s linear, background-color 0.6s linear;
 }
 
 .modal__title {
   font-size: 1.2rem;
   text-transform: uppercase;
+  transition: color 0.6s linear;
 }
 
 .modal__text {
   text-align: center;
+  transition: color 0.6s linear;
+}
+
+.modal__div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 
 .button {
-  font-size: calc((50vw + 50vh) * 0.01);
+  font-size: 1.2rem;
   border-radius: 1vw;
   padding: 12px 18px;
   background-color: #cccccc;
@@ -193,7 +207,12 @@ body {
 }
 
 .modal__button {
-  width: 50%;
+  width: 70%;
+}
+
+.reset__button {
+  width: 100%;
+  font-size: 1.2rem;
 }
 
 body {
@@ -204,6 +223,9 @@ body {
 body.dark-theme {
   --cross-color: #fff;
   --circle-color: #fff;
+  background-color: #111;
+}
+body.dark-theme .html {
   background-color: #111;
 }
 body.dark-theme .game {
@@ -246,6 +268,14 @@ body.dark-theme .loader:after {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.result-modal {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .header {
@@ -255,7 +285,7 @@ body.dark-theme .loader:after {
   gap: 10px;
   max-width: 43vw;
   flex-wrap: wrap;
-  transition: opacity 0.2s linear, visibility 0.2s linear;
+  transition: opacity 0.4s linear, visibility 0.4s linear;
 }
 
 .game {
@@ -280,14 +310,16 @@ body.dark-theme .loader:after {
   transition: background-color 0.6s linear, opacity 0.2s linear, visibility 0.2s linear, transform 0.4s ease-in-out;
   position: relative;
 }
-.game-field:hover::after {
-  position: absolute;
-  content: url("../../img/game/cross.svg");
-  animation: clicked 0.2s ease-in-out;
-  opacity: 0.6;
-  width: inherit;
-}
 
+@media (min-width: 767px) {
+  .game-field:hover::after {
+    position: absolute;
+    content: url("../../img/game/cross.svg");
+    animation: clicked 0.2s ease-in-out;
+    opacity: 0.6;
+    width: inherit;
+  }
+}
 .cross {
   fill: var(--cross-color);
   width: 70%;
@@ -320,5 +352,16 @@ body.dark-theme .loader:after {
   }
   100% {
     transform: scale(1);
+  }
+}
+@media (max-width: 650px) {
+  .button {
+    font-size: 0.8rem;
+    border-radius: 2vw;
+    padding: 8px 14px;
+  }
+  .button:hover {
+    transform: none;
+    filter: drop-shadow(0 5px 0 #222);
   }
 }

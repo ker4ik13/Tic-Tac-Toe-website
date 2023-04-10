@@ -9,7 +9,9 @@ $height: 70%;
     --cross-color: #000;
     --circle-color: #000;
 }
-
+html{
+    transition: background-color .6s linear;
+}
 .invisible{
     opacity: 0;
     visibility: hidden;
@@ -114,17 +116,26 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    transition: opacity .2s linear, visibility .2s linear;
+    transition: opacity .2s linear, visibility .2s linear, background-color .6s linear;
 }
 .modal__title {
     font-size: 1.2rem;
     text-transform: uppercase;
+    transition: color .6s linear;
 }
 .modal__text {
     text-align: center;
+    transition: color .6s linear;
+}
+.modal__div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 .button {
-    font-size: calc((50vw + 50vh) * 0.01);
+    font-size: 1.2rem;
     border-radius: 1vw;
     padding: 12px 18px;
     background-color: darken($bgcolor, 20%);
@@ -141,7 +152,11 @@ body{
     }
 }
 .modal__button{
-    width: 50%;
+    width: 70%;
+}
+.reset__button{
+    width: 100%;
+    font-size: 1.2rem;
 }
 body{
     font-family: Arial, Helvetica, sans-serif;
@@ -152,6 +167,9 @@ body{
         --circle-color: #fff;
         $bgcolor: #111;
         background-color: $bgcolor;
+        .html{
+            background-color: #111;
+        }
         .game{
             background-color: lighten($bgcolor, 10%);
         }
@@ -197,6 +215,13 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+.result-modal{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%);
 }
 .header {
     display: flex;
@@ -205,7 +230,7 @@ body{
     gap: 10px;
     max-width: 43vw;
     flex-wrap: wrap;
-    transition: opacity .2s linear, visibility .2s linear;
+    transition: opacity .4s linear, visibility .4s linear;
 }
 .game {
     margin-top: 5vh;
@@ -228,7 +253,9 @@ body{
     cursor: pointer;
     transition: background-color .6s linear, opacity .2s linear, visibility .2s linear, transform .4s ease-in-out;
     position: relative;
-    &:hover{
+}
+@media(min-width: 767px){
+    .game-field:hover{
         &::after{
             position: absolute;
             content: url('../../img/game/cross.svg');
@@ -270,5 +297,16 @@ body{
     }
     100%{
         transform: scale(1);
+    }
+}
+@media(max-width: 650px){
+    .button {
+        font-size: .8rem;
+        border-radius: 2vw;
+        padding: 8px 14px;
+        &:hover{
+            transform: none;
+            filter: drop-shadow(0 5px 0 #222);
+        }
     }
 }
