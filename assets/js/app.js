@@ -14,8 +14,6 @@ function getResponse(){
     if(localStorage.getItem('userInfo')){
         let userLocalInfo = localStorage.getItem('userInfo');
         userInfo = JSON.parse(userLocalInfo);
-        console.group('Вывод из локалки')
-        console.log(userInfo);
     }
 
     if(userInfo.darkTheme){
@@ -138,12 +136,11 @@ function createFields(section){
         div.className = 'game-field transform';
         div.id = i;
         section.appendChild(div);
-        element = div;
         setTimeout(() => {
             div.classList.remove('transform');
         }, 800);
-    
-        div.addEventListener('click', (event, element) => {
+
+        div.addEventListener('click', (event) => {
             let currentField = event.target.id;
             field[currentField] = 'cross';
 
@@ -153,7 +150,6 @@ function createFields(section){
                 return;
             }
 
-            
             let result;
             let gameOver = false;
 
@@ -250,37 +246,35 @@ function createFields(section){
 // бот
 
 function botAi(field, min, max, gameOver){
-    let botChoise = Math.floor( Math.random() * (max - min) + min);
-
-    console.log(botChoise);
+    let firstBotChoise = Math.floor( Math.random() * (max - min) + min);
 
     for (let i = 1; i <= 100; i++){
-        if(field[botChoise] != ''){
-            botChoise = Math.floor( Math.random() * (max - min) + min);
-            console.log(botChoise);
+        if(field[firstBotChoise] != ''){
+            firstBotChoise = Math.floor( Math.random() * (max - min) + min);
         }
     }
-    field[botChoise] = 'circle';
+
+    field[firstBotChoise] = 'circle';
+
+    const game = document.querySelector('.game');
+    const gameFields = game.querySelectorAll('.game-field');
 
     //отрисовка кругов бота 
+
     if(gameOver){
-        botChoise = '';
-        console.log('Игра закончена');
+        firstBotChoise = '';
     } else {
-        const game = document.querySelector('.game');
-        gameFields = game.querySelectorAll('.game-field');
         gameFields.forEach(field => {
-            if (field.id == botChoise) {
+            if (field.id == firstBotChoise) {
                 setTimeout(() => {
                     field.innerHTML = `<svg class="circle"><use xlink:href="#circle"></use></svg>`
                 }, 200);
             }
         });
     }
-    
-
-    
 };
+
+
 
 
 // модальное окно результатов
@@ -385,22 +379,22 @@ function again(result){
             container.innerHTML = `
                 <div class="modal again-modal invisible">
                     <p class="modal__title">Вы победили</p>
-                    <p class="modal__text">Начать заного?</p>
-                    <button class="button modal__button" id="again">Заного</button>
+                    <p class="modal__text">Начать заново?</p>
+                    <button class="button modal__button" id="again">Заново</button>
                 </div>`         
         } else if(result == 'lose') {
             container.innerHTML = `
                 <div class="modal again-modal invisible">
                     <p class="modal__title">Вы проиграли</p>
-                    <p class="modal__text">Начать заного?</p>
-                    <button class="button modal__button" id="again">Заного</button>
+                    <p class="modal__text">Начать заново?</p>
+                    <button class="button modal__button" id="again">Заново</button>
                 </div>`
         } else if(result == 'nobody'){
             container.innerHTML = `
             <div class="modal again-modal invisible">
                 <p class="modal__title">Ничья</p>
-                <p class="modal__text">Начать заного?</p>
-                <button class="button modal__button" id="again">Заного</button>
+                <p class="modal__text">Начать заново?</p>
+                <button class="button modal__button" id="again">Заново</button>
             </div>`
         }
     }, 1200);
@@ -411,7 +405,7 @@ function again(result){
         modal.classList.remove('invisible');
     }, 1300);
 
-    // Кнопка заного
+    // Кнопка заново
     setTimeout(() => {
         let againButton = document.querySelector('#again');
         againButton.addEventListener('click', () => {
