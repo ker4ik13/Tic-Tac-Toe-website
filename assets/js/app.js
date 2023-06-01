@@ -388,22 +388,22 @@ function again(result){
             container.innerHTML = `
                 <div class="modal again-modal invisible">
                     <p class="modal__title">Вы победили</p>
-                    <p class="modal__text">Начать заного?</p>
-                    <button class="button modal__button" id="again">Заного</button>
+                    <p class="modal__text">Начать заново?</p>
+                    <button class="button modal__button" id="again">Заново</button>
                 </div>`         
         } else if(result == 'lose') {
             container.innerHTML = `
                 <div class="modal again-modal invisible">
                     <p class="modal__title">Вы проиграли</p>
-                    <p class="modal__text">Начать заного?</p>
-                    <button class="button modal__button" id="again">Заного</button>
+                    <p class="modal__text">Начать заново?</p>
+                    <button class="button modal__button" id="again">Заново</button>
                 </div>`
         } else if(result == 'nobody'){
             container.innerHTML = `
             <div class="modal again-modal invisible">
                 <p class="modal__title">Ничья</p>
-                <p class="modal__text">Начать заного?</p>
-                <button class="button modal__button" id="again">Заного</button>
+                <p class="modal__text">Начать заново?</p>
+                <button class="button modal__button" id="again">Заново</button>
             </div>`
         }
     }, 1200);
